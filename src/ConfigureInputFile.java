@@ -14,7 +14,7 @@ public class ConfigureInputFile {
     public static void initiate()
     {
         try{
-            FileInputStream inputDocumentStream = new FileInputStream("input.txt");
+            FileInputStream inputDocumentStream = new FileInputStream("inputTest.txt");
             BufferedReader inputDocumentReader = new BufferedReader(new InputStreamReader(inputDocumentStream));
             BufferedWriter intermidiateDocumentWriter = null;
             intermidiateDocumentWriter = new BufferedWriter(new FileWriter("IntermidiateDocument.txt"));
@@ -67,7 +67,6 @@ public class ConfigureInputFile {
                 }
             }
             swapped = new String(DocumentCharacters);
-            System.out.println(swapped);
             outputWriter.write(swapped);
             outputWriter.flush();
             outputWriter.close();

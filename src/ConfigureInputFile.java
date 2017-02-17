@@ -14,7 +14,7 @@ public class ConfigureInputFile {
     public static void initiate()
     {
         try{
-            FileInputStream inputDocumentStream = new FileInputStream("inputTest.txt");
+            FileInputStream inputDocumentStream = new FileInputStream("input.txt");
             BufferedReader inputDocumentReader = new BufferedReader(new InputStreamReader(inputDocumentStream));
             BufferedWriter intermidiateDocumentWriter = null;
             intermidiateDocumentWriter = new BufferedWriter(new FileWriter("IntermidiateDocument.txt"));
@@ -77,6 +77,60 @@ public class ConfigureInputFile {
         try{
             File f = new File("IntermidiateDocument.txt");
             f.delete();
+        }
+        catch(Exception e){}
+        //Two Combined Characters
+        handleCombinedCharacters();
+        //Three Combined Characters
+        handleCombinedCharacters();
+    }
+    
+    public static void handleCombinedCharacters()
+    {
+        try{
+            FileInputStream intermidiateFileStream = new FileInputStream("Output.txt");
+            BufferedReader intermidiateFileReader = new BufferedReader(new InputStreamReader(intermidiateFileStream));
+            
+            BufferedWriter outputWriter = null;
+            outputWriter = new BufferedWriter(new FileWriter("Output2.txt"));
+            
+            String Document = null;
+            String swapped;
+            
+            Document = intermidiateFileReader.readLine();
+            
+            //Convert the document string to character array.
+            char[] DocumentCharacters = Document.toCharArray();
+            char charMain, charKar; //Parent-Character & Kar-Character
+            for(int i = 0; i<Document.length(); i++)
+            {
+                //Swap
+                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                {
+                    if(DocumentCharacters[i-1] == '্' )
+                    {
+                        charKar = DocumentCharacters[i];
+                        charMain = DocumentCharacters[i-2];
+                        DocumentCharacters[i-2] = charKar;
+                        DocumentCharacters[i-1] = charMain;
+                        DocumentCharacters[i] = '্';
+                    }
+                }
+            }
+            swapped = new String(DocumentCharacters);
+            outputWriter.write(swapped);
+            outputWriter.flush();
+            outputWriter.close();
+        }
+        catch(Exception e){}
+        
+        //Deleating the intermidiate file
+        try{
+            File f = new File("Output.txt");
+            f.delete();
+            File oldfile =new File("Output2.txt");
+            File newfile =new File("Output.txt");
+            oldfile.renameTo(newfile);
         }
         catch(Exception e){}
     }

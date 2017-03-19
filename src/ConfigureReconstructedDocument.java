@@ -21,6 +21,8 @@ public class ConfigureReconstructedDocument {
         try{
             FileInputStream reconstructedDocStream = new FileInputStream("ReconstructedDoc.txt");
             BufferedReader roconstructedDocReader = new BufferedReader(new InputStreamReader(reconstructedDocStream));
+            BufferedWriter intermidiateDocumentWriter = null;
+            intermidiateDocumentWriter = new BufferedWriter(new FileWriter("IntermidiateReconstructedDocument.txt"));
             reconstructedDoc = roconstructedDocReader.readLine();
             char[] DocumentCharacters = reconstructedDoc.toCharArray();
             char charMain, charKar;
@@ -28,16 +30,60 @@ public class ConfigureReconstructedDocument {
             {
                 if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
                 {
-                    charKar = DocumentCharacters[i];
-                    charMain = DocumentCharacters[i+1];
-                    DocumentCharacters[i+1] = charKar;
-                    DocumentCharacters[i] = charMain;
+                    //System.out.println(i+" :"+DocumentCharacters[i]+" "+(i+1)+": "+DocumentCharacters[i+1]);
+                    if((i+1)!=reconstructedDoc.length()){
+                        charKar = DocumentCharacters[i];
+                        charMain = DocumentCharacters[i+1];
+                        DocumentCharacters[i+1] = charKar;
+                        DocumentCharacters[i] = charMain;
+                        i++;
+                    }
                 }
             }
-            System.out.println(DocumentCharacters);
             newlyConstructed = new String(DocumentCharacters);
-            System.out.println(newlyConstructed);
+            //newlyConstructed = handleCombinedCharacters(newlyConstructed);
+            //System.out.println(newlyConstructed);
+            intermidiateDocumentWriter.write(newlyConstructed);
+            intermidiateDocumentWriter.flush();
+            intermidiateDocumentWriter.close();
         }
-        catch(Exception e){}
+        catch(Exception e){
+             System.out.println(e);
+        }
     }
+    
+    public static String handleCombinedCharacters(String input)
+    {
+        String handled = null;
+        try{
+            
+            char[] DocumentCharacters = input.toCharArray();
+            char charMain, charKar; //Parent-Character & Kar-Character
+            for(int i = 0; i<input.length(); i++)
+            {
+                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                {
+                    if(DocumentCharacters[i-1] == '্' )
+                    {
+                        charKar = DocumentCharacters[i];
+                        charMain = DocumentCharacters[i-2];
+                        System.out.println(i+": "+DocumentCharacters[i]+" "+DocumentCharacters[i-2]);
+                        DocumentCharacters[i-2] = charKar;
+                        DocumentCharacters[i-1] = charMain;
+                        DocumentCharacters[i] = '্';
+                    }
+                }
+            }
+            handled = new String(DocumentCharacters);
+            System.out.println(handled);
+            return handled;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        finally{
+            return handled;
+        }
+    }
+    
 }

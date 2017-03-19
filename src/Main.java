@@ -7,7 +7,7 @@ public class Main {
     {
         //ConfigureInputFile.initiate();
         //LabelSegments.labelCharacters();
-        Reconstruct.reconstruct();
+        //Reconstruct.reconstruct();
         ConfigureReconstructedDocument.SwapCharacters();
     }
 }

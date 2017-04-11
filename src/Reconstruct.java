@@ -23,7 +23,6 @@ public class Reconstruct {
             BufferedReader segmentCodesReader = new BufferedReader(new InputStreamReader(segmentCodesStream));
             BufferedWriter reconstructedDocumentWriter = null;
             reconstructedDocumentWriter = new BufferedWriter(new FileWriter("ReconstructedDoc.txt"));
-            
             String Line;
             String CharCode;
             String finalStr = "";
@@ -43,8 +42,8 @@ public class Reconstruct {
             reconstructedDocumentWriter.flush();
             reconstructedDocumentWriter.close();
         }
-        catch(Exception e){}
-        
+        catch(Exception e){
+        }
     }
     
     public static String BanglaCodeSearch(String code)
@@ -74,6 +73,35 @@ public class Reconstruct {
         return finalChar;
     }
     
+    public static String BanglaLetterSearch(String code)
+    {
+      
+        String finalChar = null;
+        boolean found = true;
+        try{
+            FileInputStream inputBanglaCodesStream = new FileInputStream("BanglaCodes.txt");
+            BufferedReader inputBanglaReader = new BufferedReader(new InputStreamReader(inputBanglaCodesStream));
+            String Line;
+            String LineCode, BanglaCode;
+            while(found)
+            {
+                Line = inputBanglaReader.readLine();
+                StringTokenizer inputLine = new StringTokenizer(Line);
+                if(inputLine.hasMoreTokens())
+                {
+                    LineCode = inputLine.nextToken();
+                    BanglaCode = inputLine.nextToken();
+                    if(BanglaCode.equals(code)){
+                        finalChar =LineCode;
+                        found = false;
+                    }
+                }
+            }
+        }
+        catch(Exception e){}
+        return finalChar;
+        
+    }
     public static String AsciiCodeSearch(String code)
     {
         String finalChar = null;

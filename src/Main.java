@@ -5,9 +5,9 @@
 public class Main {
     public static void main(String args[])
     {
-        //ConfigureInputFile.initiate();
-        //LabelSegments.labelCharacters();
-        //Reconstruct.reconstruct();
+//        ConfigureInputFile.initiate();
+        TwoSegments.labelCharacters();
+        Reconstruct.reconstruct();
         ConfigureReconstructedDocument.SwapCharacters();
     }
 }

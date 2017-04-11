@@ -13,6 +13,7 @@ public class TwoSegments {
         String document = null;
          String banglaCharCode = null;
         String segmentCode = "";    
+        String banglaNewCodes= "";
          String firstCombCharCode=null;
          String secCombCharCode = null;
         try{
@@ -405,7 +406,7 @@ public class TwoSegments {
                           
                         else if(document.charAt(i) == 'স' && document.charAt(i+2) == 'ফ') 
                             segmentCode += "5643\n";
-                        else if(document.charAt(i) == 'থ' && document.charAt(i+2) == 'র' && document.charAt(i+3) == 'ে') 
+                        else if(document.charAt(i) == 'থ' && document.charAt(i+2) == 'র' && document.charAt(i-1) == 'ে') 
                             segmentCode += "374871\n";
                         else if(document.charAt(i) == 'ধ' && document.charAt(i+2) == 'র' && document.charAt(i-1) == 'ু') 
                             segmentCode += "394865\n";
@@ -602,21 +603,24 @@ public class TwoSegments {
                         }
                         else if(document.charAt(i)== 'ু'){
                          banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         banglaCharCode = banglaCharCode + "65\n";
-                         segmentCode += banglaCharCode;
+                         banglaCharCode = banglaCharCode + "65";
+                         segmentCode += banglaCharCode+"\n";
+                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ু"+"\n";
                          banglaCharCode = null;
                         }
                            
                        else if(document.charAt(i)== 'ূ'){
                          banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         banglaCharCode = banglaCharCode + "66\n";
-                         segmentCode += banglaCharCode;
+                         banglaCharCode = banglaCharCode + "66";
+                         segmentCode += banglaCharCode+"\n";
+                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ূ"+"\n";
                          banglaCharCode = null;
                         }
                       else if(document.charAt(i)== 'ৃ'){
                          banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         banglaCharCode = banglaCharCode + "67\n";
-                         segmentCode += banglaCharCode;
+                         banglaCharCode = banglaCharCode + "67";
+                         segmentCode += banglaCharCode+"\n";
+                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ৃ"+"\n";
                          banglaCharCode = null;
                         }
                     }
@@ -625,7 +629,7 @@ public class TwoSegments {
             
         
         catch(Exception e){}
-        //System.out.println(segmentCode);
+        System.out.println(banglaNewCodes);
         try{
             BufferedWriter outputWriter = null;
             outputWriter = new BufferedWriter(new FileWriter("SegmentCodes.txt"));

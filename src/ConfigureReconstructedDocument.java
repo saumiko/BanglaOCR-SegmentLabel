@@ -26,11 +26,12 @@ public class ConfigureReconstructedDocument {
             reconstructedDoc = roconstructedDocReader.readLine();
             char[] DocumentCharacters = reconstructedDoc.toCharArray();
             char charMain, charKar;
+
             for(int i = 0; i<reconstructedDoc.length(); i++)
             {
-                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                 if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ'||DocumentCharacters[i]=='ু'||DocumentCharacters[i]=='ূ'||DocumentCharacters[i]=='ৃ')
                 {
-                    //System.out.println(i+" :"+DocumentCharacters[i]+" "+(i+1)+": "+DocumentCharacters[i+1]);
+                    System.out.println("ghure fire");
                     if((i+1)!=reconstructedDoc.length()){
                         charKar = DocumentCharacters[i];
                         charMain = DocumentCharacters[i+1];
@@ -61,7 +62,7 @@ public class ConfigureReconstructedDocument {
             char charMain, charKar; //Parent-Character & Kar-Character
             for(int i = 0; i<input.length(); i++)
             {
-                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                 if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ'||DocumentCharacters[i]=='ু'||DocumentCharacters[i]=='ূ'||DocumentCharacters[i]=='ৃ')
                 {
                     if(DocumentCharacters[i-1] == '্' )
                     {

@@ -10,27 +10,88 @@ public class TwoSegments {
     public static void labelCharacters()
     {
         Reconstruct recon = new Reconstruct();
-        String document = null;
-         String banglaCharCode = null;
-        String segmentCode = "";    
-        String banglaNewCodes= "";
-         String firstCombCharCode=null;
-         String secCombCharCode = null;
+        String document = "";
+         String banglaCharCode = "";
+        String segmentCode = "";   
+         String banglaCharCodeNext = "";
+         String banglaCharCodeLast = "";
+         
+        String banglaNewCodes= "‌\n";
+         String firstCombCharCode="";
+         String secCombCharCode = "";
         try{
             FileInputStream inputDocumentStream = new FileInputStream("Output.txt");
             BufferedReader inputDocumentReader = new BufferedReader(new InputStreamReader(inputDocumentStream));
             document = inputDocumentReader.readLine();
             for(int i=0; i<document.length(); i++)
             {
-                
+                 
                 if(document.charAt(i+1) == '্' )
                 {   
                     
                     //Three Combined Characters
                     if(document.charAt(i+3) == '্' )
                     {
+
                         if(document.charAt(i)=='ক' && document.charAt(i+2)=='ষ' && document.charAt(i+4)=='য')
                             segmentCode += "215547 215547\n";
+                          else if(document.charAt(i-1)== 'ো'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                          banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                          banglaCharCodeLast =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+4)));
+                         banglaCharCode = "75\n" +  banglaCharCode + banglaCharCodeNext + banglaCharCodeLast + "‌\n75‌\n";
+                         segmentCode += banglaCharCode;
+                         banglaCharCode = "";
+                         banglaCharCodeNext = "";
+                         banglaCharCodeLast = "";
+                        }
+                        
+                        else if(document.charAt(i-1)== 'ৌ'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                          banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                          banglaCharCodeLast =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+4)));
+                         banglaCharCode = "76\n" +  banglaCharCode + banglaCharCodeNext + banglaCharCodeLast + "\n76‌\n";
+                         segmentCode += banglaCharCode;
+                         banglaCharCode = "";
+                         banglaCharCodeNext = "";
+                         banglaCharCodeLast = "";
+                        }
+                        else if(document.charAt(i-1)== 'ু'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                         banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                        banglaCharCodeLast =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+4)));
+                          
+                         banglaCharCode = banglaCharCode + banglaCharCodeNext + banglaCharCodeLast + "65";
+                         segmentCode += banglaCharCode+"\n";
+                          banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i)) +Character.toString(document.charAt(i+2))+Character.toString(document.charAt(i+4))+"ু"+"\n";
+                       banglaCharCode = "";
+                       banglaCharCodeNext="";
+                         banglaCharCodeLast = "";
+                        }
+                           
+                       else if(document.charAt(i-1)== 'ূ'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                         banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         banglaCharCodeLast =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+4)));
+                          
+                         banglaCharCode = banglaCharCode + banglaCharCodeNext + banglaCharCodeLast + "66";
+                         segmentCode += banglaCharCode+"\n";
+                          banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i)) +Character.toString(document.charAt(i+2))+Character.toString(document.charAt(i+4))+"ূ"+"\n";
+                       banglaCharCodeNext="";
+                         banglaCharCode = "";
+                         banglaCharCodeLast = "";
+                        }
+                      else if(document.charAt(i-1)== 'ৃ'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                         banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         banglaCharCodeLast =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+4)));                          
+                         banglaCharCode = banglaCharCode + banglaCharCodeNext + banglaCharCodeLast + "67";  
+                         segmentCode += banglaCharCode+"\n";
+                          banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i)) +Character.toString(document.charAt(i+2))+Character.toString(document.charAt(i+4))+"ৃ"+"\n";
+                       banglaCharCode = "";
+                         banglaCharCodeNext="";
+                         banglaCharCodeLast = "";
+                        }
                         else if(document.charAt(i)=='ক' && document.charAt(i+2)=='ষ' && document.charAt(i+4)=='ম')
                             segmentCode += "215546\n";
                         else if(document.charAt(i)=='ক' && document.charAt(i+2)=='ষ' && document.charAt(i+4)=='ণ')
@@ -90,10 +151,66 @@ public class TwoSegments {
                     //Two Combined Characters
                     else
                     {
+
+                      
                         if(document.charAt(i) == 'স' && document.charAt(i+2) == 'ক') {
-                            System.out.println("ui");
                               segmentCode += "5621\n";
                         }
+                          else if(document.charAt(i) == 'থ' && document.charAt(i+2) == 'র' && document.charAt(i-1) == 'ে') {
+                            segmentCode = segmentCode.substring(0,segmentCode.length()-3);
+                            segmentCode += "374871\n";
+                        }
+
+                          else if(document.charAt(i-1)== 'ো'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                          banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         banglaCharCode = "75\n" +  banglaCharCode + banglaCharCodeNext + "‌\n75‌\n";
+                         segmentCode += banglaCharCode;
+                         banglaCharCode = "";
+                         banglaCharCodeNext = "";
+                        }
+                        
+                        else if(document.charAt(i-1)== 'ৌ'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                          banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         banglaCharCode = "76\n" +  banglaCharCode + banglaCharCodeNext + "\n76‌\n";
+                         segmentCode += banglaCharCode;
+                         banglaCharCode = "";
+                         banglaCharCodeNext = "";
+                        }
+                        else if(document.charAt(i-1)== 'ু'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                         banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         banglaCharCode = banglaCharCode + banglaCharCodeNext + "65";
+                         segmentCode += banglaCharCode+"\n";
+                          banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i)) +Character.toString(document.charAt(i+2)) + "ু" +"\n";
+                       banglaCharCode = "";
+                       banglaCharCodeNext="";
+                        }
+                           
+                       else if(document.charAt(i-1)== 'ূ'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                         banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         
+                         banglaCharCode = banglaCharCode + banglaCharCodeNext + "66";
+                         segmentCode += banglaCharCode+"\n";
+                          banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i)) +Character.toString(document.charAt(i+2)) + "ূ" +"\n";
+                       banglaCharCodeNext="";
+                         banglaCharCode = "";
+                        }
+                      else if(document.charAt(i-1)== 'ৃ'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i)));
+                         banglaCharCodeNext =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+2)));
+                         
+                         banglaCharCode = banglaCharCode + banglaCharCodeNext + "67";
+                         segmentCode += banglaCharCode+"\n";
+                          banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i)) +Character.toString(document.charAt(i+2)) + "ৃ" +"\n";
+                       banglaCharCode = "";
+                         banglaCharCodeNext="";
+                        }
+                        else if(document.charAt(i) == 'স' && document.charAt(i+2) == 'র' && document.charAt(i+3) == 'ু') 
+                            segmentCode += "564865\n";
+                   
                         else if(document.charAt(i) == 'ন' && document.charAt(i+2) == 'য') 
                             segmentCode += "4047 4047\n";
                         else if(document.charAt(i) == 'ব' && document.charAt(i+2) == 'য') 
@@ -405,22 +522,55 @@ public class TwoSegments {
                         
                           
                         else if(document.charAt(i) == 'স' && document.charAt(i+2) == 'ফ') 
-                            segmentCode += "5643\n";
-                        else if(document.charAt(i) == 'থ' && document.charAt(i+2) == 'র' && document.charAt(i-1) == 'ে') 
-                            segmentCode += "374871\n";
-                        else if(document.charAt(i) == 'ধ' && document.charAt(i+2) == 'র' && document.charAt(i-1) == 'ু') 
-                            segmentCode += "394865\n";
-                        else if(document.charAt(i) == 'স' && document.charAt(i+2) == 'র' && document.charAt(i+3) == 'ু') 
-                            segmentCode += "564865\n";
-                    }
+                            segmentCode += "5643\n"; }
                     
                 }
                 //Single Characters
                 
                else
                 {
-                    if(document.charAt(i)== 'ি' && document.charAt(i+1)== 'ট')
-                            segmentCode += "3163";
+                        if(document.charAt(i)== 'ি' && document.charAt(i+1)== 'ট')
+                            segmentCode += "3163 3163\n";
+
+                        else if(document.charAt(i)== 'ী' && document.charAt(i+1)== 'য়')
+                            segmentCode += "9564 9564 9564 9564\n";
+                    
+                         else if(document.charAt(i)== 'ো' && document.charAt(i+2)!= '্'){
+                            banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
+                            segmentCode += "75\n" + banglaCharCode+"\n" +"75\n";
+                            banglaCharCode = "";
+                        }
+                        
+                        else if(document.charAt(i)== 'ৌ' && document.charAt(i+2)!= '্'){
+                            banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
+                            segmentCode += "76\n" + banglaCharCode+"\n" +"76\n";
+                            banglaCharCode = "";
+                        }
+                        else if(document.charAt(i)== 'ু' && document.charAt(i+2)!= '্'){
+                            banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
+                            banglaCharCode = banglaCharCode + "65";
+                            segmentCode += banglaCharCode+"\n";
+                            banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +document.charAt(i)+"\n";
+                             banglaCharCode = "";
+                        }
+                           
+                       else if(document.charAt(i)== 'ূ' && document.charAt(i+2)!= '্'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
+                         banglaCharCode = banglaCharCode + "66";
+                         segmentCode += banglaCharCode+"\n";
+                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ূ"+"\n";
+                       
+                         banglaCharCode = "";
+                        }
+
+                      else if(document.charAt(i)== 'ৃ' && document.charAt(i+2)!= '্'){
+                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
+                         banglaCharCode = banglaCharCode + "67";
+                         segmentCode += banglaCharCode+"\n";
+                         banglaNewCodes+= banglaCharCode + " " +  Character.toString(document.charAt(i+1)) +"ৃ"+"\n";
+                         banglaCharCode = "";
+                        }
+
                        else if(document.charAt(i)== 'ঐ')
                             segmentCode += "16\n";
                             
@@ -590,39 +740,7 @@ public class TwoSegments {
                         else if(document.charAt(i)== 'জ')
                             segmentCode += "28\n";
                          
-                          else if(document.charAt(i)== 'ো'){
-                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         segmentCode += "75\n" + banglaCharCode+"\n" +"75\n";
-                         banglaCharCode = null;
-                        }
-                        
-                        else if(document.charAt(i)== 'ৌ'){
-                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         segmentCode += "76\n" + banglaCharCode+"\n" +"76\n";
-                         banglaCharCode = null;
-                        }
-                        else if(document.charAt(i)== 'ু'){
-                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         banglaCharCode = banglaCharCode + "65";
-                         segmentCode += banglaCharCode+"\n";
-                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ু"+"\n";
-                         banglaCharCode = null;
-                        }
-                           
-                       else if(document.charAt(i)== 'ূ'){
-                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         banglaCharCode = banglaCharCode + "66";
-                         segmentCode += banglaCharCode+"\n";
-                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ূ"+"\n";
-                         banglaCharCode = null;
-                        }
-                      else if(document.charAt(i)== 'ৃ'){
-                         banglaCharCode =  Reconstruct.BanglaLetterSearch(Character.toString(document.charAt(i+1)));
-                         banglaCharCode = banglaCharCode + "67";
-                         segmentCode += banglaCharCode+"\n";
-                         banglaNewCodes+= banglaCharCode +" " +  Character.toString(document.charAt(i+1)) +"ৃ"+"\n";
-                         banglaCharCode = null;
-                        }
+                     
                     }
                 }
             }
@@ -632,10 +750,15 @@ public class TwoSegments {
         System.out.println(banglaNewCodes);
         try{
             BufferedWriter outputWriter = null;
+            BufferedWriter banglaCodeWriter = null;
             outputWriter = new BufferedWriter(new FileWriter("SegmentCodes.txt"));
             outputWriter.write(segmentCode);
             outputWriter.flush();
             outputWriter.close();
+             banglaCodeWriter = new BufferedWriter(new FileWriter("BanglaCodes.txt", true));
+            banglaCodeWriter.write(banglaNewCodes);
+            banglaCodeWriter.flush();
+            banglaCodeWriter.close();
         }
         catch(Exception e){}
     }

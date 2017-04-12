@@ -48,7 +48,7 @@ public class Reconstruct {
     
     public static String BanglaCodeSearch(String code)
     {
-        String finalChar = null;
+        String finalChar = "";
         boolean found = true;
         try{
             FileInputStream inputBanglaCodesStream = new FileInputStream("BanglaCodes.txt");
@@ -76,7 +76,7 @@ public class Reconstruct {
     public static String BanglaLetterSearch(String code)
     {
       
-        String finalChar = null;
+        String finalChar = "";
         boolean found = true;
         try{
             FileInputStream inputBanglaCodesStream = new FileInputStream("BanglaCodes.txt");
@@ -85,6 +85,7 @@ public class Reconstruct {
             String LineCode, BanglaCode;
             while(found)
             {
+               
                 Line = inputBanglaReader.readLine();
                 StringTokenizer inputLine = new StringTokenizer(Line);
                 if(inputLine.hasMoreTokens())
@@ -104,7 +105,7 @@ public class Reconstruct {
     }
     public static String AsciiCodeSearch(String code)
     {
-        String finalChar = null;
+        String finalChar = "";
         boolean found = true;
         try{
             FileInputStream inputAsciiCodesStream = new FileInputStream("ASCII.txt");

@@ -5,7 +5,7 @@
 public class Main {
     public static void main(String args[])
     {
-//        ConfigureInputFile.initiate();
+        ConfigureTwoSegment.initiate();
         TwoSegments.labelCharacters();
         Reconstruct.reconstruct();
         ConfigureReconstructedDocument.SwapCharacters();

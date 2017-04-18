@@ -5,16 +5,7 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author saumiko
- */
 public class Reconstruct {
     public static void reconstruct()
     {

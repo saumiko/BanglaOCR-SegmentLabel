@@ -6,8 +6,8 @@ public class Main {
     public static void main(String args[])
     {
         ConfigureTwoSegment.initiate();
-        TwoSegments.labelCharacters();
-        Reconstruct.reconstruct();
-        ConfigureReconstructedDocument.SwapCharacters();
+         TwoSegments.labelCharacters();
+        // Reconstruct.reconstruct();
+        // ConfigureReconstructedDocument.SwapCharacters();
     }
 }

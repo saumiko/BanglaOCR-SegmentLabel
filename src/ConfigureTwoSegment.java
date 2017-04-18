@@ -14,7 +14,7 @@ public class ConfigureTwoSegment {
     public static void initiate()
     {
         try{
-            FileInputStream inputDocumentStream = new FileInputStream("input.txt");
+            FileInputStream inputDocumentStream = new FileInputStream("GranadaOutput.txt");
             BufferedReader inputDocumentReader = new BufferedReader(new InputStreamReader(inputDocumentStream));
             BufferedWriter intermidiateDocumentWriter = null;
             intermidiateDocumentWriter = new BufferedWriter(new FileWriter("IntermidiateDocument.txt"));

@@ -7,14 +7,14 @@ import java.io.BufferedWriter;
  * This class will configure the input.txt file.
  * @author saumiko
  */
-public class ConfigureInputFile {
+public class ConfigureTwoSegment {
     /*
     * This method will take the input file and create an intermidiate file (OutputChar.txt) without all the spaces in the main document.
     */
     public static void initiate()
     {
         try{
-            FileInputStream inputDocumentStream = new FileInputStream("input.txt");
+            FileInputStream inputDocumentStream = new FileInputStream("GranadaOutput.txt");
             BufferedReader inputDocumentReader = new BufferedReader(new InputStreamReader(inputDocumentStream));
             BufferedWriter intermidiateDocumentWriter = null;
             intermidiateDocumentWriter = new BufferedWriter(new FileWriter("IntermidiateDocument.txt"));
@@ -49,7 +49,6 @@ public class ConfigureInputFile {
             
             String Document = null;
             String swapped;
-            
             Document = intermidiateFileReader.readLine();
             
             //Convert the document string to character array.
@@ -58,7 +57,7 @@ public class ConfigureInputFile {
             for(int i = 0; i<Document.length(); i++)
             {
                 //Swap
-                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ'||DocumentCharacters[i]=='ু'||DocumentCharacters[i]=='ূ'||DocumentCharacters[i]=='ৃ')
                 {
                     charKar = DocumentCharacters[i];
                     charMain = DocumentCharacters[i-1];
@@ -82,7 +81,7 @@ public class ConfigureInputFile {
         //Two Combined Characters
         handleCombinedCharacters();
         //Three Combined Characters
-        handleCombinedCharacters();
+        handleCombinedCharacters();       
     }
     
     public static void handleCombinedCharacters()
@@ -105,7 +104,7 @@ public class ConfigureInputFile {
             for(int i = 0; i<Document.length(); i++)
             {
                 //Swap
-                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ'||DocumentCharacters[i]=='ু'||DocumentCharacters[i]=='ূ'||DocumentCharacters[i]=='ৃ')
                 {
                     if(DocumentCharacters[i-1] == '্' )
                     {

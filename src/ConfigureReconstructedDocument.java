@@ -4,16 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author saumiko
- */
 public class ConfigureReconstructedDocument {
     public static void SwapCharacters()
     {
@@ -26,11 +16,11 @@ public class ConfigureReconstructedDocument {
             reconstructedDoc = roconstructedDocReader.readLine();
             char[] DocumentCharacters = reconstructedDoc.toCharArray();
             char charMain, charKar;
+
             for(int i = 0; i<reconstructedDoc.length(); i++)
             {
-                if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
+                 if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
                 {
-                    //System.out.println(i+" :"+DocumentCharacters[i]+" "+(i+1)+": "+DocumentCharacters[i+1]);
                     if((i+1)!=reconstructedDoc.length()){
                         charKar = DocumentCharacters[i];
                         charMain = DocumentCharacters[i+1];
@@ -40,6 +30,7 @@ public class ConfigureReconstructedDocument {
                     }
                 }
             }
+            System.out.println(DocumentCharacters);
             newlyConstructed = new String(DocumentCharacters);
             //newlyConstructed = handleCombinedCharacters(newlyConstructed);
             //System.out.println(newlyConstructed);
@@ -50,40 +41,54 @@ public class ConfigureReconstructedDocument {
         catch(Exception e){
              System.out.println(e);
         }
+        
+        //Two Combined Characters
+        handleCombinedCharacters();
+        //Three Combined Characters
+        handleCombinedCharacters();      
+
     }
-    
-    public static String handleCombinedCharacters(String input)
+ public static void handleCombinedCharacters()
     {
-        String handled = null;
-        try{
+    try{
+            FileInputStream intermidiateFileStream = new FileInputStream("IntermidiateReconstructedDocument.txt");
+            BufferedReader intermidiateFileReader = new BufferedReader(new InputStreamReader(intermidiateFileStream));
             
-            char[] DocumentCharacters = input.toCharArray();
+            BufferedWriter outputWriter = null;
+            outputWriter = new BufferedWriter(new FileWriter("FinalReconstructed.txt"));
+            
+            String Document = null;
+            String swapped;
+            
+            Document = intermidiateFileReader.readLine();
+            
+            //Convert the document string to character array.
+            char[] DocumentCharacters = Document.toCharArray();
             char charMain, charKar; //Parent-Character & Kar-Character
-            for(int i = 0; i<input.length(); i++)
+            for(int i = 0; i<Document.length(); i++)
             {
+                //Swap
                 if(DocumentCharacters[i]=='ি'||DocumentCharacters[i]=='ে'||DocumentCharacters[i]=='ো'||DocumentCharacters[i]=='ৌ'||DocumentCharacters[i]=='ৈ')
                 {
-                    if(DocumentCharacters[i-1] == '্' )
+                    if(DocumentCharacters[i+1] == '্' )
                     {
                         charKar = DocumentCharacters[i];
-                        charMain = DocumentCharacters[i-2];
-                        System.out.println(i+": "+DocumentCharacters[i]+" "+DocumentCharacters[i-2]);
-                        DocumentCharacters[i-2] = charKar;
-                        DocumentCharacters[i-1] = charMain;
+                        charMain = DocumentCharacters[i+2];
+                        DocumentCharacters[i+2] = charKar;
+                        DocumentCharacters[i+1] = charMain;
                         DocumentCharacters[i] = '্';
                     }
                 }
             }
-            handled = new String(DocumentCharacters);
-            System.out.println(handled);
-            return handled;
+            swapped = new String(DocumentCharacters);
+            outputWriter.write(swapped);
+            outputWriter.flush();
+            outputWriter.close();
         }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        finally{
-            return handled;
-        }
+        catch(Exception e){}
+        
+        //Deleating the intermidiate file
+       
     }
     
 }
